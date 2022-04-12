@@ -1,59 +1,68 @@
-import { Button } from 'antd';
-
-import DualAxes from './component/DualAxes';
+import Line from "./component/Line";
+import { useEffect, useState } from "react";
+import { Input, Button, message } from "antd";
+import { getCpuData, getMemData } from './api';
 
 function App() {
-  const data = [
-    {
-      year: '1991',
-      value: 3,
-      count: 10,
-    },
-    {
-      year: '1992',
-      value: 4,
-      count: 4,
-    },
-    {
-      year: '1993',
-      value: 3.5,
-      count: 5,
-    },
-    {
-      year: '1994',
-      value: 5,
-      count: 5,
-    },
-    {
-      year: '1995',
-      value: 4.9,
-      count: 4.9,
-    },
-    {
-      year: '1996',
-      value: 6,
-      count: 35,
-    },
-    {
-      year: '1997',
-      value: 7,
-      count: 7,
-    },
-    {
-      year: '1998',
-      value: 9,
-      count: 1,
-    },
-    {
-      year: '1999',
-      value: 13,
-      count: 20,
-    },
-  ];
+  const [cpu, setCpu] = useState([]);
+  const [mem, setMem] = useState([]);
+  const [date, setDate] = useState([]);
+
+  useEffect(() => {
+    getCpuData().then((res) => {
+      setCpu(res.data.list);
+    });
+
+    getMemData().then((res) => {
+      setMem(res.data.list);
+    });
+  }, []);
+
+  function changeInputVal(e) {
+    setDate(e.target.value)
+  }
+
+  function refreshData() {
+    const dateReg = /([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))/
+    if (!dateReg.test(date)) {
+      message.error('日期格式不正确');
+      return false;
+    }
+
+    getCpuData({ date }).then((res) => {
+      setCpu(res.data.list);
+    });
+
+    getMemData({ date }).then((res) => {
+      setMem(res.data.list);
+    });
+  }
+
   return (
     <div className="App">
-      <DualAxes data={data}></DualAxes>
-      <Button type="primary">Primary Button</Button>
+      <Input.Group compact>
+        <Input
+          style={{ width: "calc(100% - 200px)" }}
+          placeholder="请输入日期"
+          onChange={changeInputVal}
+        />
+        <Button type="primary" onClick={refreshData}>Submit</Button>
+      </Input.Group>
+      <h1>CPU使用</h1>
+      <Line
+        data={cpu}
+        xField={"timestamp"}
+        yField={"usedPercent"}
+        seriesField={"coreIndex"}
+      ></Line>
+
+      <h1>内存使用</h1>
+      <Line
+        data={mem}
+        xField={"timestamp"}
+        yField={"usedPercent"}
+        seriesField={null}
+      ></Line>
     </div>
   );
 }
