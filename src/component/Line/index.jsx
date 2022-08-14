@@ -18,7 +18,7 @@ const CpuLine = (props) => {
     }
   };
 
-  return <Line {...options} />;
+  return <Line {...options} onClick = { (...args) => { console.log(args) } }/>;
 };
 
 export default CpuLine;

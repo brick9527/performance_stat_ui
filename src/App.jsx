@@ -13,7 +13,7 @@ function App() {
       <h1>日期选择</h1>
       <DatePicker
         autoFocus={true}
-        onChange={() => { setDate(date ? date.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD')) }} />
+        onChange={(currentDate) => { setDate(currentDate ? currentDate.format('YYYY-MM-DD') : dayjs().format('YYYY-MM-DD')) }} />
 
       <CpuLine date={date}/>
       
