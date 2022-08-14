@@ -1,0 +1,28 @@
+{
+  "name": "performance_stat_ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/charts": "^1.4.2",
+    "antd": "^4.22.4",
+    "axios": "^0.27.2",
+    "dayjs": "^1.11.5",
+    "qs": "^6.11.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "less": "^4.1.3",
+    "less-loader": "^11.0.0",
+    "vite": "^3.0.0"
+  }
+}
