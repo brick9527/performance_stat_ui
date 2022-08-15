@@ -15,10 +15,10 @@ const CpuLine = (props) => {
       min: 0,
       minLimit: 0,
       maxLimit: 100,
-    }
+    },
   };
 
-  return <Line {...options} onClick = { (...args) => { console.log(args) } }/>;
+  return <Line {...options} onReady={props.onReady}/>;
 };
 
 export default CpuLine;

@@ -12,6 +12,21 @@ function MemLine (props) {
     });
   }, [date]);
 
+  function onReady(plot) {
+    plot.on('plot:click', (event) => {
+      const { x, y } = event;
+      const tooltipData = plot.chart.getTooltipItems({ x, y });
+      const pointData = _.get(tooltipData, '[0].data', {});
+      console.log(_.get(tooltipData, '[0].data'));
+      const { batchId } = pointData;
+      if (!batchId) {
+        return;
+      }
+
+      // TODO: 获取进程信息
+    })
+  }
+
   return (
     <div>
       <h1>内存使用</h1>
@@ -20,6 +35,7 @@ function MemLine (props) {
         xField={"timestamp"}
         yField={"usedPercent"}
         seriesField={null}
+        onReady={onReady}
       ></Line>
     </div>
   );
