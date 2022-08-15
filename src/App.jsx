@@ -4,12 +4,14 @@ import dayjs from 'dayjs';
 
 import CpuLine from './component/CpuLine';
 import MemLine from './component/MemLine';
+import Test from './component/Test';
 
 function App() {
   const [date, setDate] = useState(null);
 
   return (
     <div className="App">
+      <Test />
       <h1>日期选择</h1>
       <DatePicker
         autoFocus={true}
@@ -18,6 +20,7 @@ function App() {
       <CpuLine date={date}/>
       
       <MemLine date={date}/>
+
     </div>
   );
 }

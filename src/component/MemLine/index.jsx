@@ -1,3 +1,6 @@
+import _ from 'lodash';
+import { connect } from 'react-redux';
+
 import Line from "../Line";
 import { getMemData } from '../../api';
 import { useEffect, useState } from "react";
@@ -23,6 +26,7 @@ function MemLine (props) {
         return;
       }
 
+      props.setBatchId(batchId);
       // TODO: 获取进程信息
     })
   }
@@ -41,4 +45,13 @@ function MemLine (props) {
   );
 }
 
-export default MemLine;
+const mapDispatchToProps = (dispatch) => {
+  // 返回一个对象，该对象每个方法就是一个action，所有的这些action都将绑定到组件的props参数上
+  return {
+    setBatchId: (value) => {
+      dispatch({ type: 'batchId/set', value });
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(MemLine);
