@@ -10,12 +10,14 @@ const CpuLine = (props) => {
     legend: {
       position: 'top',
     },
+    smooth: props.smooth || false,
     yAxis: {
       max: 100,
       min: 0,
       minLimit: 0,
       maxLimit: 100,
     },
+    tooltip: props.tooltip,
   };
 
   return <Line {...options} onReady={props.onReady}/>;

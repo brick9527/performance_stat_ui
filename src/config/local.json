@@ -1,0 +1,7 @@
+{
+  "url": {
+    "mem": "http://127.0.0.1:3001/api/stat/mem",
+    "cpu": "http://127.0.0.1:3001/api/stat/cpu",
+    "process": "http://127.0.0.1:3001/api/stat/process"
+  }
+}

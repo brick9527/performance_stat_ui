@@ -5,6 +5,7 @@ import Line from "../Line";
 import { getCpuData } from '../../api';
 import { useEffect, useState } from "react";
 
+
 function CpuLine (props) {
   const [cpu, setCpu] = useState([]);
   const { date } = props;
@@ -38,6 +39,11 @@ function CpuLine (props) {
         xField={"timestamp"}
         yField={"usedPercent"}
         seriesField={"coreIndex"}
+        tooltip={{
+          formatter: (dataItem) => {
+            return { name: `core ${dataItem.coreIndex}`, value: dataItem.usedPercent + '%' };
+          },        
+        }}
         onReady={onReady}
       ></Line>
     </div>

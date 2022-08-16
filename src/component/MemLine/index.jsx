@@ -40,6 +40,7 @@ function MemLine (props) {
         yField={"usedPercent"}
         seriesField={null}
         onReady={onReady}
+        smooth={true}
       ></Line>
     </div>
   );
