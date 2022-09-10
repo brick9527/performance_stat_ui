@@ -11,3 +11,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - refactor project with `vite` + `react@17`
+- add `redux`
+- adjust layout
